@@ -89,55 +89,55 @@ namespace hal {
         using p15 = lp::bit<15>;
     };
 
-    template <typename GpioBlock>
+    template <typename Gpio_block>
     struct gpio {
-        using block = GpioBlock;
+        using block = Gpio_block;
         using output = typename block::odr;
         using input = typename block::idr;
 
         template <pins::mode mode, typename ...Pins>
         static void set_mode() noexcept {
-            set_value<typename GpioBlock::moder, static_cast<lp::u32_t>(mode), 2, Pins...>();
+            set_value<typename block::moder, static_cast<lp::u32_t>(mode), 2, Pins...>();
         }
 
         template <typename ...Pins>
         static void set_open_drain() noexcept {
-            GpioBlock::otyper::template set_or<Pins...>();
+            block::otyper::template set_or<Pins...>();
         }
 
         template <typename ...Pins>
         static void set_push_pull() noexcept {
-            GpioBlock::otyper::template set_nand<Pins...>();
+            block::otyper::template set_nand<Pins...>();
         }
 
         template <pins::speed speed, typename ...Pins>
         static void set_speed() noexcept {
-            set_value<typename GpioBlock::ospeedr, static_cast<lp::u32_t>(speed), 2, Pins...>();
+            set_value<typename block::ospeedr, static_cast<lp::u32_t>(speed), 2, Pins...>();
         }
 
         template <pins::pull pull, typename ...Pins>
         static void set_pull() noexcept {
-            set_value<typename GpioBlock::pupdr, static_cast<lp::u32_t>(pull), 2, Pins...>();
+            set_value<typename block::pupdr, static_cast<lp::u32_t>(pull), 2, Pins...>();
         }
 
         template <typename ...Pins>
         static void set_value() noexcept {
-            GpioBlock::bsrr::template set<Pins...>();
+            block::bsrr::template set<Pins...>();
         }
 
         template <typename ...Pins>
         static void reset_value() noexcept {
-            GpioBlock::bsrr::template set<16, Pins...>();
+            block::bsrr::template set<16, Pins...>();
         }
 
         template <typename ...Pins>
         static void lock() noexcept {
-            GpioBlock::lckr::template set_or<Pins...>();
+            block::lckr::template set_or<Pins...>();
         }
 
         template <typename ...Pins>
         static void unlock() noexcept {
-            GpioBlock::lckr::template set_nand<Pins...>();
+            block::lckr::template set_nand<Pins...>();
         }
 
         template <pins::alt alt_func, typename ...Pins>
@@ -152,11 +152,11 @@ namespace hal {
 
         template <typename ...Pins>
         static void reset() noexcept {
-            GpioBlock::brr::template set_or<Pins...>();
+            block::brr::template set_or<Pins...>();
         }
 
     private:
-        using afr64 = lp::io_register<lp::u64_t, GpioBlock::afrl::address>;
+        using afr64 = lp::io_register<lp::u64_t, block::afrl::address>;
 
         template <typename GpioRegister, lp::u32_t value, lp::u32_t shift, typename ...Pins>
         static void set_value() noexcept {

@@ -29,9 +29,9 @@
 #define HAL_USART_TYPE_HH
 
 namespace hal {
-    template <typename UsartBlock>
+    template <typename Usart_block>
     struct usart {
-        using block = UsartBlock;
+        using block = Usart_block;
         using input = typename block::rdr;
         using output = typename block::tdr;
 
