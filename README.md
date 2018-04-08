@@ -13,3 +13,6 @@ It consist:
         4. SysTick (Partial)
         5. USART (Partial)
  - CMake based core and device specific flags for correct build procedures
+
+Library depends:
+ - lp_cc_lib (types and defines)
