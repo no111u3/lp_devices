@@ -20,7 +20,7 @@
 #include "isr_extend.hh"
 #include "isr_extend_impl.hh"
 
-__attribute__((naked, noreturn)) void isr::default_handler_extend() {
+__attribute__((noreturn)) void isr::default_handler_extend() {
     // nothing in prototype
     while (true);
 }
