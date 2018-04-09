@@ -25,7 +25,7 @@
 namespace hal {
     struct stk {
         template <lp::u32_t ticks>
-        static void config() noexcept {
+        static constexpr void config() noexcept {
             using timer = ::stk;
             static_assert(ticks <= timer::load_reload::mask<lp::u32_t>::value + 1, "Can't set value greater than 2^24");
 

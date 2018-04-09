@@ -54,17 +54,17 @@ namespace hal {
         >;
 
         template <typename ...Params>
-        static void setup() noexcept {
+        static constexpr void setup() noexcept {
             lp::register_op_unpack<register_setup_list, lp::repack_v<Params...>>::apply();
         }
 
-        static void send(lp::u32_t word) noexcept {
+        static constexpr void send(lp::u32_t word) noexcept {
             while (!block::isr::template get_and<typename block::isr_txe>());
 
             output::get() = word;
         }
 
-        static lp::u32_t recv() noexcept {
+        static constexpr lp::u32_t recv() noexcept {
             while (!block::isr::template get_and<typename block::isr_rxne>());
 
             return input::get();

@@ -96,22 +96,22 @@ namespace hal {
         using input = typename block::idr;
 
         template <pins::mode mode, typename ...Pins>
-        static void set_mode() noexcept {
+        static constexpr void set_mode() noexcept {
             set_value<typename block::moder, static_cast<lp::u32_t>(mode), 2, Pins...>();
         }
 
         template <typename ...Pins>
-        static void set_open_drain() noexcept {
+        static constexpr void set_open_drain() noexcept {
             block::otyper::template set_or<Pins...>();
         }
 
         template <typename ...Pins>
-        static void set_push_pull() noexcept {
+        static constexpr void set_push_pull() noexcept {
             block::otyper::template set_nand<Pins...>();
         }
 
         template <pins::speed speed, typename ...Pins>
-        static void set_speed() noexcept {
+        static constexpr void set_speed() noexcept {
             set_value<typename block::ospeedr, static_cast<lp::u32_t>(speed), 2, Pins...>();
         }
 
@@ -121,37 +121,37 @@ namespace hal {
         }
 
         template <typename ...Pins>
-        static void set_value() noexcept {
+        static constexpr void set_value() noexcept {
             block::bsrr::template set<Pins...>();
         }
 
         template <typename ...Pins>
-        static void reset_value() noexcept {
+        static constexpr void reset_value() noexcept {
             block::bsrr::template set<16, Pins...>();
         }
 
         template <typename ...Pins>
-        static void lock() noexcept {
+        static constexpr void lock() noexcept {
             block::lckr::template set_or<Pins...>();
         }
 
         template <typename ...Pins>
-        static void unlock() noexcept {
+        static constexpr void unlock() noexcept {
             block::lckr::template set_nand<Pins...>();
         }
 
         template <pins::alt alt_func, typename ...Pins>
-        static void set_alt_func() noexcept {
+        static constexpr void set_alt_func() noexcept {
             set_value<afr64, static_cast<lp::u32_t>(alt_func), 4, Pins...>();
         }
 
         template <device::alt alt_func, typename ...Pins>
-        static void set_alt_func() noexcept {
+        static constexpr void set_alt_func() noexcept {
             set_value<afr64, static_cast<lp::u32_t>(alt_func), 4, Pins...>();
         }
 
         template <typename ...Pins>
-        static void reset() noexcept {
+        static constexpr void reset() noexcept {
             block::brr::template set_or<Pins...>();
         }
 
@@ -159,7 +159,7 @@ namespace hal {
         using afr64 = lp::io_register<lp::u64_t, block::afrl::address>;
 
         template <typename GpioRegister, lp::u32_t value, lp::u32_t shift, typename ...Pins>
-        static void set_value() noexcept {
+        static constexpr void set_value() noexcept {
             GpioRegister::template set_nand<
                 typename lp::bit<
                     Pins::position * shift, shift

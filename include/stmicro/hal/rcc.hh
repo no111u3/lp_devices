@@ -45,13 +45,13 @@ namespace hal {
         >;
 
         template <typename ...DevBits>
-        static void device_enable() noexcept {
+        static constexpr void device_enable() noexcept {
             using dev_bits = lp::type_list<DevBits...>;
             lp::register_op_unpack<register_op_set_or_list, dev_bits>::apply();
         }
 
         template <typename ...DevBits>
-        static void device_disable() noexcept {
+        static constexpr void device_disable() noexcept {
             using dev_bits = lp::type_list<DevBits...>;
             lp::register_op_unpack<register_op_set_nand_list, dev_bits>::apply();
         }

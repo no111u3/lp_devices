@@ -26,7 +26,7 @@
 namespace hal {
     struct nvic {
         template <irq_dev_num_t irq_n>
-        static void enable_irq() noexcept {
+        static constexpr void enable_irq() noexcept {
             nvic_device::iser::value_type<
                 (static_cast<lp::word_t>(irq_n) >> 5)
             >::template set<lp::bit<(static_cast<lp::word_t>(irq_n) & 0x1f)>>();
