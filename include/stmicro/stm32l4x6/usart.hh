@@ -178,10 +178,8 @@ struct usart_t {
 
     /* Baud rate register */
     using brr = lp::io_register<lp::u32_t, base_address + 0xc>;
-    /* DIV_Mantissa */
-    using brr_div_mantissa = lp::assoc_bit<brr, 4, 12>;
-    /* DIV_Fraction */
-    using brr_div_fraction = lp::assoc_bit<brr, 0, 4>;
+    /* BRR */
+    using brr_brr = lp::assoc_bit<brr, 0, 20>;
 
 
     /* Guard time and prescaler           register */

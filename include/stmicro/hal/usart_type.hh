@@ -20,8 +20,10 @@
 
 #include <bit.hh>
 #include <io_register.hh>
+#include <io_register_operation_traits.hh>
 #include <types.hh>
 #include <type_list.hh>
+#include <type_list_traits.hh>
 
 #include <usart.hh>
 
@@ -36,20 +38,24 @@ namespace hal {
         using output = typename block::tdr;
 
         struct config {
-            struct pins {
-                using none = typename block::cr1_ue;
-                using tx_only = lp::type_list<none, typename block::cr1_te>;
-                using rx_only = lp::type_list<none, typename block::cr1_re>;
-                using txrx = lp::type_list<none,
-                    typename block::cr1_te,
-                    typename block::cr1_re>;
-            };
+            using none = typename block::cr1_ue;
+            using tx_only = lp::type_list<none, typename block::cr1_te>;
+            using rx_only = lp::type_list<none, typename block::cr1_re>;
+            using txrx = lp::type_list<none,
+                typename block::cr1_te,
+                typename block::cr1_re>;
+            template <lp::word_t Periph_clock, lp::word_t Baudrate>
+            using baudrate = typename block::brr_brr::template with_value<Periph_clock / Baudrate>;
         };
 
-        template <typename params, lp::u32_t baud_divider>
+        using register_setup_list = lp::type_list<
+            typename block::brr,
+            typename block::cr1::op_set_or
+        >;
+
+        template <typename ...Params>
         static void setup() noexcept {
-            block::brr::get() = baud_divider;
-            block::cr1::template set_or<params>();
+            lp::register_op_unpack<register_setup_list, lp::repack_v<Params...>>::apply();
         }
 
         static void send(lp::u32_t word) noexcept {
