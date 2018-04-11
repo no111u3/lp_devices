@@ -12,12 +12,14 @@ file(GLOB LIB_SRC
     "${LIB_DIR}/src/${CPU_VENDOR}/${CPU}/isr_base.cc"
 )
 
-set(LP_DEVICE_SRC ${LIB_SRC} PARENT_SCOPE)
+add_library(lp_devices ${LIB_SRC})
+add_library(lp::devices ALIAS lp_devices)
 
-add_library(lp_devices INTERFACE)
+target_link_libraries(lp_devices
+    PRIVATE lp::cc_lib
+)
 
-#include vendor and device specific headers
-target_include_directories(lp_devices INTERFACE "${LIB_DIR}/include")
-target_include_directories(lp_devices INTERFACE "${LIB_DIR}/include/${CPU_VENDOR}/${CPU}")
-target_include_directories(lp_devices INTERFACE "${LIB_DIR}/include/${VENDOR}")
-target_include_directories(lp_devices INTERFACE "${LIB_DIR}/include/${VENDOR}/${DEVICE_FAMILY}")
+target_include_directories(lp_devices PUBLIC "${LIB_DIR}/include")
+target_include_directories(lp_devices PUBLIC "${LIB_DIR}/include/${CPU_VENDOR}/${CPU}")
+target_include_directories(lp_devices PUBLIC "${LIB_DIR}/include/${VENDOR}")
+target_include_directories(lp_devices PUBLIC "${LIB_DIR}/include/${VENDOR}/${DEVICE_FAMILY}")
