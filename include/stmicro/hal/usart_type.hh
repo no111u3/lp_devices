@@ -58,6 +58,10 @@ namespace hal {
             lp::register_op_unpack<register_setup_list, lp::repack_v<Params...>>::apply();
         }
 
+        static constexpr void disable() noexcept {
+            block::cr1::template set_nand<typename block::cr1_ue>();
+        }
+
         static constexpr void send(lp::u32_t word) noexcept {
             while (!block::isr::template get_and<typename block::isr_txe>());
 
