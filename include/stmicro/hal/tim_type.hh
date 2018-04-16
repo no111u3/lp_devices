@@ -34,7 +34,6 @@ namespace hal {
     template <typename Tim_block>
     struct tim {
         using block = Tim_block;
-        using status = typename block::sr;
 
         struct config {
             using update_int_enable = typename block::dier_uie;
@@ -42,6 +41,10 @@ namespace hal {
             using prescaller = typename block::psc_psc::template with_value<Prescaller - 1>;
             template <lp::word_t Reload_value>
             using reload_value = typename block::arr_arr::template with_value<Reload_value>;
+        };
+
+        struct status {
+            using update_int = typename block::sr_uif;
         };
 
         using register_setup_list = lp::type_list<
@@ -65,12 +68,12 @@ namespace hal {
 
         template <typename ...Bits>
         static constexpr auto get_status() noexcept {
-            return status::template get_and<Bits...>();
+            return block::sr::template get_and<Bits...>();
         }
 
         template <typename ...Bits>
         static constexpr void clear_status() noexcept {
-            status::template set_nand<Bits...>();
+            block::sr::template set_nand<Bits...>();
         }
     };
 } // namespace hal
