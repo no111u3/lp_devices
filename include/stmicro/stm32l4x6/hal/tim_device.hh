@@ -25,17 +25,17 @@
 
 namespace hal {
     namespace tim_device {
-        using tim2 = tim<tim2>;
-        using tim3 = tim<tim3>;
-        using tim4 = tim<tim4>;
-        using tim5 = tim<tim5>;
-        using tim15 = tim<tim15>;
-        using tim16 = tim<tim16>;
-        using tim17 = tim<tim17>;
-        using tim1 = tim<tim1>;
-        using tim8 = tim<tim8>;
-        using tim6 = tim<tim6>;
-        using tim7 = tim<tim7>;
+        using tim2 = tim_general<tim2>;
+        using tim3 = tim_general<tim3>;
+        using tim4 = tim_general<tim4>;
+        using tim5 = tim_general<tim5>;
+        using tim15 = tim_general<tim15>;
+        using tim16 = tim_general<tim16>;
+        using tim17 = tim_general<tim17>;
+        using tim1 = tim_general<tim1>;
+        using tim8 = tim_general<tim8>;
+        using tim6 = tim_base<tim6>;
+        using tim7 = tim_base<tim7>;
     }
 }
 
