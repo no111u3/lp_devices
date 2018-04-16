@@ -358,11 +358,11 @@ struct rtc_t {
 
 
     /* option register */
-    using or = lp::io_register<lp::u32_t, base_address + 0x4c>;
+    using or1 = lp::io_register<lp::u32_t, base_address + 0x4c>;
     /* RTC_ALARM on PC13 output               type */
-    using or_rtc_alarm_type = lp::assoc_bit<or, 0>;
+    using or1_rtc_alarm_type = lp::assoc_bit<or1, 0>;
     /* RTC_OUT remap */
-    using or_rtc_out_rmp = lp::assoc_bit<or, 1>;
+    using or1_rtc_out_rmp = lp::assoc_bit<or1, 1>;
 
 
     /* backup register */

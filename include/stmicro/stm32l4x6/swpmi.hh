@@ -137,11 +137,11 @@ struct swpmi_t {
 
 
     /* SWPMI Option register */
-    using or = lp::io_register<lp::u32_t, base_address + 0x24>;
+    using or1 = lp::io_register<lp::u32_t, base_address + 0x24>;
     /* SWP transceiver bypass */
-    using or_swp_tbyp = lp::assoc_bit<or, 0>;
+    using or1_swp_tbyp = lp::assoc_bit<or1, 0>;
     /* SWP class selection */
-    using or_swp_class = lp::assoc_bit<or, 1>;
+    using or1_swp_class = lp::assoc_bit<or1, 1>;
 
 
 };

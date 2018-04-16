@@ -322,11 +322,11 @@ struct tim_t {
 
 
     /* TIM2 option register */
-    using or = lp::io_register<lp::u32_t, base_address + 0x50>;
+    using or1 = lp::io_register<lp::u32_t, base_address + 0x50>;
     /* Timer2 ETR remap */
-    using or_etr_rmp = lp::assoc_bit<or, 0, 3>;
+    using or1_etr_rmp = lp::assoc_bit<or1, 0, 3>;
     /* Internal trigger */
-    using or_ti4_rmp = lp::assoc_bit<or, 3, 2>;
+    using or1_ti4_rmp = lp::assoc_bit<or1, 3, 2>;
 
 
 };
