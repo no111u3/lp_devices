@@ -27,9 +27,77 @@ namespace hal {
     struct nvic {
         template <irq_dev_num_t irq_n>
         static constexpr void enable_irq() noexcept {
-            nvic_device::iser::value_type<
+            nvic_device::iser::get<
                 (static_cast<lp::word_t>(irq_n) >> 5)
             >::template set<lp::bit<(static_cast<lp::word_t>(irq_n) & 0x1f)>>();
+        }
+
+        template <irq_dev_num_t irq_n>
+        static constexpr void disable_irq() noexcept {
+            nvic_device::icer::get<
+                (static_cast<lp::word_t>(irq_n) >> 5)
+            >::template set<lp::bit<(static_cast<lp::word_t>(irq_n) & 0x1f)>>();
+        }
+
+        template <irq_dev_num_t irq_n>
+        static constexpr auto get_pending_irq() noexcept {
+            return nvic_device::ispr::get<
+                (static_cast<lp::word_t>(irq_n) >> 5)
+            >::template get_and<lp::bit<(static_cast<lp::word_t>(irq_n) & 0x1f)>>();
+        }
+
+        template <irq_dev_num_t irq_n>
+        static constexpr void set_pending_irq() noexcept {
+            nvic_device::ispr::get<
+                (static_cast<lp::word_t>(irq_n) >> 5)
+            >::template set<lp::bit<(static_cast<lp::word_t>(irq_n) & 0x1f)>>();
+        }
+
+        template <irq_dev_num_t irq_n>
+        static constexpr void clear_pending_irq() noexcept {
+            nvic_device::icpr::get<
+                (static_cast<lp::word_t>(irq_n) >> 5)
+            >::template set<lp::bit<(static_cast<lp::word_t>(irq_n) & 0x1f)>>();
+        }
+
+        template <irq_dev_num_t irq_n>
+        static constexpr auto get_active_irq() noexcept {
+            return nvic_device::iabr::get<
+                (static_cast<lp::word_t>(irq_n) >> 5)
+            >::template get_and<lp::bit<(static_cast<lp::word_t>(irq_n) & 0x1f)>>();
+        }
+
+        template <irq_dev_num_t irq_n, lp::word_t priority>
+        static constexpr void set_irq_priority() noexcept {
+            nvic_device::ipr::get<
+                (static_cast<lp::word_t>(irq_n) >> 2)
+                >::template set_nand<
+                    lp::bit<
+                        (static_cast<lp::word_t>(irq_n) & 0x3) * 8,
+                        8
+                    >
+                >();
+
+            nvic_device::ipr::get<
+                (static_cast<lp::word_t>(irq_n) >> 2)
+                >::template set_or<
+                    lp::bit<
+                        (static_cast<lp::word_t>(irq_n) & 0x3) * 8,
+                        8
+                    >::template with_value<priority>
+                >();
+        }
+
+        template <irq_dev_num_t irq_n>
+        static constexpr auto get_irq_priority() noexcept {
+            return nvic_device::ipr::get<
+                (static_cast<lp::word_t>(irq_n) >> 2)
+                >::template get_and<
+                    lp::bit<
+                        (static_cast<lp::word_t>(irq_n) & 0x3) * 8,
+                        8
+                    >
+                >();
         }
     };
 }

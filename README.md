@@ -8,7 +8,7 @@ It consist:
  - Base device middle-level core and peripheral support
    1. STMicro devices
         1. GPIO
-        2. Interrupts/NVIC (Partial)
+        2. Interrupts/NVIC
         3. RCC (Partial)
         4. SysTick (Partial)
         5. USART (Partial)
