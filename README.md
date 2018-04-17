@@ -11,9 +11,10 @@ It consist:
         2. GPIO
         3. Interrupts/NVIC
         4. RCC (Partial)
-        5. SysTick (Partial)
-        6. TIM (Partial)
-        7. USART (Partial)
+        5. SysCfg (Partial)
+        6. SysTick (Partial)
+        7. TIM (Partial)
+        8. USART (Partial)
  - CMake based core and device specific flags for correct build procedures
 
 Library depends:
