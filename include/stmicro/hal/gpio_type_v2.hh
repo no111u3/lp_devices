@@ -121,6 +121,11 @@ namespace hal {
         }
 
         template <typename ...Pins>
+        static constexpr auto get_value() noexcept {
+            return input::template get_and<Pins...>();
+        }
+
+        template <typename ...Pins>
         static constexpr void set_value() noexcept {
             block::bsrr::template set<Pins...>();
         }
