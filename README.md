@@ -12,7 +12,7 @@ It consist:
         3. Interrupts/NVIC
         4. RCC (Partial)
         5. SysCfg (Partial)
-        6. SysTick (Partial)
+        6. SysTick
         7. TIM (Partial)
         8. USART (Partial)
  - CMake based core and device specific flags for correct build procedures

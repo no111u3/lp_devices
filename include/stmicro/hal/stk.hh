@@ -17,6 +17,8 @@
  * @author Boris Vinogradov
  */
 
+#include <types.hh>
+
 #include <stk.hh>
 
 #ifndef HAL_STK_HH
@@ -24,15 +26,20 @@
 
 namespace hal {
     struct stk {
+        using timer = ::stk;
+
         template <lp::u32_t ticks>
         static constexpr void config() noexcept {
-            using timer = ::stk;
             static_assert(ticks <= timer::load_reload::mask<lp::u32_t>::value + 1, "Can't set value greater than 2^24");
 
             timer::load::set<timer::load_reload::with_value<ticks - 1>>();
             timer::val::set<timer::val_current::with_value<0>>();
 
             timer::ctrl::set_or<timer::ctrl_enable, timer::ctrl_tickint, timer::ctrl_clksource>();
+        }
+
+        static constexpr void disable() noexcept {
+            timer::ctrl::set_nand<timer::ctrl_enable>();
         }
     };
 }
