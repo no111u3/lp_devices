@@ -7,12 +7,13 @@ It consist:
         1. STM32L4x6 family (stm32l476)
  - Base device middle-level core and peripheral support
    1. STMicro devices
-        1. GPIO
-        2. Interrupts/NVIC
-        3. RCC (Partial)
-        4. SysTick (Partial)
+        1. EXTI
+        2. GPIO
+        3. Interrupts/NVIC
+        4. RCC (Partial)
+        5. SysTick (Partial)
         6. TIM (Partial)
-        5. USART (Partial)
+        7. USART (Partial)
  - CMake based core and device specific flags for correct build procedures
 
 Library depends:
