@@ -28,77 +28,77 @@
 namespace hal {
     struct exti {
         template <device::exti exti_num>
-        static void unmask_int() {
+        static constexpr void unmask_int() noexcept {
             exti_device::imr::get<
                 (static_cast<lp::word_t>(exti_num) >> 5)
             >::template set_or<lp::bit<(static_cast<lp::word_t>(exti_num) & 0x1f)>>();
         }
 
         template <device::exti exti_num>
-        static void mask_int() {
+        static constexpr void mask_int() noexcept {
             exti_device::imr::get<
                 (static_cast<lp::word_t>(exti_num) >> 5)
             >::template set_nand<lp::bit<(static_cast<lp::word_t>(exti_num) & 0x1f)>>();
         }
 
         template <device::exti exti_num>
-        static void unmask_event() {
+        static constexpr void unmask_event() noexcept {
             exti_device::emr::get<
                 (static_cast<lp::word_t>(exti_num) >> 5)
             >::template set_or<lp::bit<(static_cast<lp::word_t>(exti_num) & 0x1f)>>();
         }
 
         template <device::exti exti_num>
-        static void mask_event() {
+        static constexpr void mask_event() noexcept {
             exti_device::emr::get<
                 (static_cast<lp::word_t>(exti_num) >> 5)
             >::template set_nand<lp::bit<(static_cast<lp::word_t>(exti_num) & 0x1f)>>();
         }
 
         template <device::exti exti_num>
-        static void rising_edge_en() {
+        static constexpr void rising_edge_en() noexcept {
             exti_device::rtsr::get<
                 (static_cast<lp::word_t>(exti_num) >> 5)
             >::template set_or<lp::bit<(static_cast<lp::word_t>(exti_num) & 0x1f)>>();
         }
 
         template <device::exti exti_num>
-        static void rising_edge_dis() {
+        static constexpr void rising_edge_dis() noexcept {
             exti_device::rtsr::get<
                 (static_cast<lp::word_t>(exti_num) >> 5)
             >::template set_nand<lp::bit<(static_cast<lp::word_t>(exti_num) & 0x1f)>>();
         }
 
         template <device::exti exti_num>
-        static void faling_edge_en() {
+        static constexpr void faling_edge_en() noexcept {
             exti_device::ftsr::get<
                 (static_cast<lp::word_t>(exti_num) >> 5)
             >::template set_or<lp::bit<(static_cast<lp::word_t>(exti_num) & 0x1f)>>();
         }
 
         template <device::exti exti_num>
-        static void failng_edge_dis() {
+        static constexpr void failng_edge_dis() noexcept {
             exti_device::ftsr::get<
                 (static_cast<lp::word_t>(exti_num) >> 5)
             >::template set_nand<lp::bit<(static_cast<lp::word_t>(exti_num) & 0x1f)>>();
         }
 
         template <device::exti exti_num>
-        static void sw_event_en() {
+        static constexpr void sw_event_en() noexcept {
             exti_device::swier::get<
                 (static_cast<lp::word_t>(exti_num) >> 5)
             >::template set_or<lp::bit<(static_cast<lp::word_t>(exti_num) & 0x1f)>>();
         }
 
         template <device::exti exti_num>
-        static void sw_event_dis() {
+        static constexpr void sw_event_dis() noexcept {
             exti_device::swier::get<
                 (static_cast<lp::word_t>(exti_num) >> 5)
             >::template set_nand<lp::bit<(static_cast<lp::word_t>(exti_num) & 0x1f)>>();
         }
 
         template <device::exti exti_num>
-        static void pend_occurred() {
+        static constexpr void pend_occurred() noexcept {
             exti_device::pr::get<
                 (static_cast<lp::word_t>(exti_num) >> 5)
             >::template set_or<lp::bit<(static_cast<lp::word_t>(exti_num) & 0x1f)>>();

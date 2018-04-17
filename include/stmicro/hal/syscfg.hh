@@ -37,7 +37,7 @@ namespace hal {
         >;
 
         template <device::exti exti_num, device::exti_route route_num>
-        static constexpr void set_route() {
+        static constexpr void set_route() noexcept {
             exticr::get<
                 (static_cast<lp::word_t>(exti_num) >> 2)
                 >::template set_nand<
